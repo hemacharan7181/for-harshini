@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080518">
+<title>A little surprise for Harshini ✨</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#070415;color:#281536}
+#app{position:fixed;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 28%,#40206c 0,#1a1038 32%,#080518 75%)}
+#app:before{content:"";position:absolute;inset:0;opacity:.65;background-image:radial-gradient(circle,#fff 1px,transparent 1.5px),radial-gradient(circle,#ffb4d3 1px,transparent 1.5px);background-size:83px 83px,137px 137px;background-position:13px 19px,71px 43px;animation:stars 18s linear infinite}
+@keyframes stars{to{background-position:96px 102px,12px 3px}}
+.progress{position:fixed;z-index:100;top:max(18px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:6px 9px;border-radius:999px;background:#ffffff20;backdrop-filter:blur(12px)}
+.dot{width:7px;height:7px;border-radius:50%;background:#ffc2dd8c;transition:.35s}.dot.active{width:25px;background:#ff72a8}
+.scene{position:absolute;inset:0;display:grid;place-items:center;padding:76px 18px 28px;opacity:0;pointer-events:none;transform:scale(1.015);transition:opacity .65s,transform .65s}
+.scene.active{opacity:1;pointer-events:auto;transform:scale(1)}
+.card{position:relative;z-index:4;width:min(440px,92vw);max-height:82vh;overflow:hidden;padding:22px 20px 20px;border:1px solid #ffffffcc;border-radius:28px;background:#fff9f7f5;box-shadow:0 28px 100px #0006;text-align:center}
+.kicker{margin-bottom:12px;font-size:11px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#a72c61}
+.media{width:min(310px,76vw);aspect-ratio:1;margin:0 auto 16px;overflow:hidden;border-radius:22px;background:#160c2e;box-shadow:0 12px 35px #19052330}
+.media video{display:block;width:100%;height:100%;object-fit:cover}
+.title{margin:5px 0 9px;font-family:Georgia,serif;font-size:clamp(28px,7vw,42px);line-height:1.05;color:#9f2057}
+.subtitle{margin:0 auto;max-width:355px;font-size:15px;line-height:1.55;color:#705e77}
+.small-note{margin:12px auto 0;max-width:350px;font-size:13px;line-height:1.5;color:#846e87}
+
+#meteorScene{background:radial-gradient(circle at 50% 45%,#7135aa59,transparent 35%),radial-gradient(circle at 80% 10%,#ff56a11f,transparent 25%)}
+.space{position:absolute;inset:0;overflow:hidden}
+.intro-copy{position:absolute;z-index:20;left:50%;top:50%;width:min(520px,88vw);transform:translate(-50%,-50%);text-align:center;color:#fff;opacity:0;transition:opacity .8s}
+.intro-copy.show{opacity:1}
+.intro-kicker{font-size:11px;font-weight:900;letter-spacing:.22em;color:#ff9ec4;text-transform:uppercase}
+.intro-copy h1{margin:13px 0 9px;font-family:Georgia,serif;font-size:clamp(38px,9vw,72px);line-height:.98;text-shadow:0 8px 40px #ff338e47}
+.intro-copy p{margin:0 auto;max-width:420px;font-size:15px;line-height:1.6;color:#e9dced}
+.meteor{position:absolute;left:-12vw;top:8vh;width:38px;height:38px;border-radius:50%;opacity:0;background:radial-gradient(circle at 34% 28%,#fff 0 5%,#fff7d0 7%,#ffd45c 22%,#ff6b35 48%,#8f2145 72%,transparent 74%);box-shadow:0 0 18px 7px #ffb34ee6,0 0 45px 15px #ff5b738c;transform:rotate(-25deg)}
+.meteor:before{content:"";position:absolute;width:210px;height:25px;right:22px;top:8px;border-radius:100%;transform:rotate(-4deg);background:linear-gradient(90deg,transparent,#ff6d4326,#ffbf578c,#fff5bee6);filter:blur(7px)}
+.meteor:after{content:"";position:absolute;width:100px;height:100px;left:-31px;top:-31px;border-radius:50%;background:radial-gradient(circle,#fff2b966,transparent 68%);filter:blur(7px)}
+.meteor.fly{animation:meteorFly 2.9s cubic-bezier(.14,.68,.16,1) forwards}
+@keyframes meteorFly{0%{opacity:0;transform:translate3d(0,0,0) rotate(-25deg) scale(.45)}8%{opacity:1}55%{opacity:1}100%{opacity:1;transform:translate3d(112vw,64vh,0) rotate(-25deg) scale(2.2)}}
+.impact{position:absolute;left:calc(50% - 9px);top:calc(58% - 9px);width:18px;height:18px;border-radius:50%;opacity:0;background:#fff;box-shadow:0 0 15px 7px #fff,0 0 45px 18px #ff9e42}
+.impact.blast{animation:blast 1.15s ease-out forwards}
+@keyframes blast{0%{opacity:0;transform:scale(.2)}10%{opacity:1;transform:scale(1)}32%{opacity:1;transform:scale(5)}100%{opacity:0;transform:scale(1)}}
+.shockwave{position:absolute;left:50%;top:58%;width:40px;height:40px;border:2px solid #ffe2a5e6;border-radius:50%;opacity:0;transform:translate(-50%,-50%)}
+.shockwave.blast{animation:shock 1.35s ease-out forwards}
+@keyframes shock{0%{opacity:0;transform:translate(-50%,-50%) scale(.1)}12%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(22)}}
+.flash{position:absolute;inset:0;z-index:15;background:#fff8df;opacity:0;pointer-events:none}.flash.blast{animation:flash .75s ease-out forwards}
+@keyframes flash{0%{opacity:0}20%{opacity:.95}100%{opacity:0}}
+.impact-message{position:absolute;z-index:30;left:50%;top:58%;transform:translate(-50%,-50%) scale(.7);opacity:0;width:min(650px,90vw);text-align:center;color:#fff}
+.impact-message.show{animation:impactText 1s .05s cubic-bezier(.17,.84,.3,1) forwards}
+.impact-message .tiny{font-size:11px;font-weight:900;letter-spacing:.2em;color:#ffc0da;text-transform:uppercase}
+.impact-message h2{margin:12px 0 8px;font-family:Georgia,serif;font-size:clamp(35px,8vw,66px);line-height:1}
+.impact-message p{margin:0;color:#eadff2;font-size:15px}
+@keyframes impactText{to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.final-scene{background:radial-gradient(circle at 50% 28%,#ff5fa629,transparent 30%),radial-gradient(circle at 20% 70%,#6d49d633,transparent 30%)}
+.float{position:absolute;z-index:1;font-size:20px;color:#ff8fbd;opacity:.65;animation:floatUp 7s linear infinite}
+.f1{left:9%;bottom:-30px}.f2{left:82%;bottom:-40px;animation-delay:2s}.f3{left:25%;bottom:-30px;animation-delay:4s}.f4{left:68%;bottom:-30px;animation-delay:1s}
+@keyframes floatUp{to{transform:translateY(-110vh) rotate(18deg);opacity:0}}
+@media(max-width:520px){.scene{padding-top:68px}.card{padding:18px 16px}.media{margin-bottom:12px}.subtitle{font-size:14px}.small-note{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+<div class="progress" aria-hidden="true"><i class="dot active"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+
+<section class="scene active" id="meteorScene">
+<div class="space">
+<div class="meteor" id="meteor"></div><div class="impact" id="impact"></div><div class="shockwave" id="shockwave"></div><div class="flash" id="flash"></div>
+</div>
+<div class="intro-copy" id="introCopy"><div class="intro-kicker">A little surprise for you ✨</div><h1>Hey, Harshini.</h1><p>Something special just crossed the sky carrying one very important message.</p></div>
+<div class="impact-message" id="impactMessage"><div class="tiny">Mission accomplished</div><h2>You cracked the job. 🎉</h2><p>Internship completed → full-time employee unlocked.</p></div>
+</section>
+
+<section class="scene"><div class="card"><div class="kicker">You actually did it 💗</div><div class="media"><video src="assets/dudu-wave.mp4" autoplay loop muted playsinline preload="auto"></video></div><h2 class="title">The internship chapter is complete.</h2><p class="subtitle">All those days of learning, working, waiting and figuring things out finally led somewhere beautiful.</p></div></section>
+
+<section class="scene"><div class="card"><div class="kicker">And then came the moment ✨</div><div class="media"><video src="assets/dudu-hug.mp4" autoplay loop muted playsinline preload="auto"></video></div><h2 class="title">You made it.</h2><p class="subtitle">You kept showing up even when it was stressful, uncertain or exhausting.</p></div></section>
+
+<section class="scene"><div class="card"><div class="kicker">Remember this feeling</div><div class="media"><video src="assets/never-give-up.mp4" autoplay loop muted playsinline preload="auto"></video></div><h2 class="title">You didn't give up. 🥹</h2><p class="subtitle">And that little bit of courage, patience and hard work brought you all the way here.</p></div></section>
+
+<section class="scene"><div class="card"><div class="kicker">The sentence we were waiting for 🎓</div><div class="media"><video src="assets/warrior-cat.mp4" autoplay loop muted playsinline preload="auto"></video></div><h2 class="title">JOB CRACKED. 🥳</h2><p class="subtitle">Internship → experience → interview → offer → <b>full-time employee.</b></p><p class="small-note">This isn't just a job. It's proof that all those little efforts mattered.</p></div></section>
+
+<section class="scene"><div class="card"><div class="kicker">Now we celebrate 🎀</div><div class="media"><video src="assets/dance-cat.mp4" autoplay loop muted playsinline preload="auto"></video></div><h2 class="title">Go make them proud. ❤️</h2><p class="subtitle">Your first full-time chapter starts now. Keep that same fire, keep learning and keep becoming the person you want to be.</p></div></section>
+
+<section class="scene final-scene"><span class="float f1">♡</span><span class="float f2">♥</span><span class="float f3">♡</span><span class="float f4">♥</span><div class="card"><div class="kicker">From my heart</div><div class="media"><video src="assets/dudu-hug.mp4" autoplay loop muted playsinline preload="auto"></video></div><h2 class="title">Congratulations,<br>Harshini! 💗</h2><p class="subtitle">I hope you smiled at least a little while seeing this.<br><br><b>I'm genuinely proud of you.</b><br>Go make this new chapter yours. ✨</p></div></section>
+</div>
+
+<script>
+const scenes=[...document.querySelectorAll(".scene")],dots=[...document.querySelectorAll(".dot")],videos=[...document.querySelectorAll("video")];
+let current=0,timer=null,introStarted=false;
+
+function playVideo(v){if(!v)return;v.currentTime=0;const p=v.play();if(p&&p.catch)p.catch(()=>{})}
+function stopOtherVideos(active){videos.forEach(v=>{if(!active.contains(v)){v.pause();try{v.currentTime=0}catch(e){}}})}
+
+function showScene(i){
+ current=Math.max(0,Math.min(i,scenes.length-1));
+ scenes.forEach((s,n)=>s.classList.toggle("active",n===current));
+ dots.forEach((d,n)=>d.classList.toggle("active",n===current));
+ const active=scenes[current];stopOtherVideos(active);active.querySelectorAll("video").forEach(playVideo);
+ clearTimeout(timer);
+ if(current===0)runMeteorIntro();
+ else timer=setTimeout(()=>showScene(current+1),current===scenes.length-1?9000:6200);
+}
+
+function runMeteorIntro(){
+ if(introStarted)return;introStarted=true;
+ const meteor=document.getElementById("meteor"),impact=document.getElementById("impact"),shock=document.getElementById("shockwave"),flash=document.getElementById("flash"),intro=document.getElementById("introCopy"),msg=document.getElementById("impactMessage");
+ setTimeout(()=>intro.classList.add("show"),500);
+ setTimeout(()=>meteor.classList.add("fly"),1000);
+ setTimeout(()=>{impact.classList.add("blast");shock.classList.add("blast");flash.classList.add("blast")},3850);
+ setTimeout(()=>{intro.classList.remove("show");msg.classList.add("show")},4150);
+ setTimeout(()=>showScene(1),6200);
+}
+
+window.addEventListener("load",()=>showScene(0));
+document.addEventListener("click",e=>{if(!e.target.closest("video")&&current>0&&current<scenes.length-1)showScene(current+1)});
+window.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key===" ")showScene(current+1);if(e.key==="ArrowLeft")showScene(current-1)});
+</script>
+</body>
+</html>
