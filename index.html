@@ -13,6 +13,7 @@
   <title>For Harshini 💗</title>
 
   <style>
+
     /* =========================================================
        RESET
     ========================================================= */
@@ -153,9 +154,7 @@
 
     .progress-dot.active {
       width: 25px;
-
       background: #ff78aa;
-
       transform: scaleY(1.05);
     }
 
@@ -490,7 +489,6 @@
     .shockwave.second {
       width: 25px;
       height: 25px;
-
       border-color: #ff8db9;
     }
 
@@ -971,19 +969,16 @@
 
     .heart.two {
       left: 80%;
-
       animation-delay: 1.8s;
     }
 
     .heart.three {
       left: 28%;
-
       animation-delay: 3.5s;
     }
 
     .heart.four {
       left: 67%;
-
       animation-delay: 5s;
     }
 
@@ -1141,6 +1136,18 @@
 
 <body>
 
+  <!-- =======================================================
+       BACKGROUND MUSIC
+  ======================================================== -->
+
+  <audio
+    id="bgMusic"
+    src="assets/rexlambo-falling-in-love.mp3"
+    loop
+    preload="auto"
+  ></audio>
+
+
   <div id="app">
 
     <div class="stars"></div>
@@ -1156,6 +1163,7 @@
       aria-hidden="true"
     >
       <span class="progress-dot active"></span>
+      <span class="progress-dot"></span>
       <span class="progress-dot"></span>
       <span class="progress-dot"></span>
       <span class="progress-dot"></span>
@@ -1575,6 +1583,9 @@
       ...document.querySelectorAll(".slide-video")
     ];
 
+    const bgMusic =
+      document.getElementById("bgMusic");
+
     const meteorScene =
       document.getElementById("meteorScene");
 
@@ -1615,16 +1626,103 @@
 
 
     /* =========================================================
+       BACKGROUND MUSIC
+    ========================================================= */
+
+    bgMusic.volume = 0.35;
+
+    function startMusic() {
+
+      if (!bgMusic) {
+        return;
+      }
+
+      bgMusic.volume = 0.35;
+
+      const promise =
+        bgMusic.play();
+
+      if (promise) {
+
+        promise.catch(() => {
+
+          /*
+            Safari may block autoplay
+            until the first interaction.
+
+            The click/touch listeners below
+            retry playback automatically.
+          */
+
+        });
+
+      }
+
+    }
+
+
+    /*
+      Try autoplay when page loads.
+    */
+
+    window.addEventListener(
+      "load",
+      () => {
+
+        startMusic();
+
+      }
+    );
+
+
+    /*
+      Safari / iPhone / browser autoplay
+      fallback.
+    */
+
+    document.addEventListener(
+      "click",
+      () => {
+
+        startMusic();
+
+      },
+      {
+        once: true
+      }
+    );
+
+
+    document.addEventListener(
+      "touchstart",
+      () => {
+
+        startMusic();
+
+      },
+      {
+        once: true,
+        passive: true
+      }
+    );
+
+
+    /* =========================================================
        VIDEO FUNCTIONS
     ========================================================= */
 
     function stopVideo(video) {
 
       try {
+
         video.pause();
+
         video.currentTime = 0;
+
       } catch (error) {
+
         // Ignore browser-specific media errors.
+
       }
 
     }
@@ -1650,13 +1748,6 @@
           ""
         );
 
-        /*
-          Important:
-          load() makes Safari/GitHub Pages
-          re-read the MP4 when the slide
-          becomes visible.
-        */
-
         video.load();
 
         const promise =
@@ -1665,19 +1756,20 @@
         if (promise) {
 
           promise.catch(() => {
-            /*
-              Autoplay can be blocked by
-              some browser configurations.
 
-              The user can still tap the page,
-              and the retry below will play it.
+            /*
+              Browser autoplay can be blocked.
+              Touch/click retry handles it.
             */
+
           });
 
         }
 
       } catch (error) {
+
         // Ignore media errors.
+
       }
 
     }
@@ -1687,9 +1779,7 @@
 
       videos.forEach(video => {
 
-        if (
-          !scene.contains(video)
-        ) {
+        if (!scene.contains(video)) {
 
           stopVideo(video);
 
@@ -1723,7 +1813,9 @@
         index < 0 ||
         index >= scenes.length
       ) {
+
         return;
+
       }
 
 
@@ -1767,8 +1859,16 @@
 
 
       /*
+        Keep music running throughout
+        the entire experience.
+      */
+
+      startMusic();
+
+
+      /*
         Meteor scene has its own
-        timeline.
+        cinematic timeline.
       */
 
       if (
@@ -1778,6 +1878,7 @@
         runMeteorSequence();
 
         return;
+
       }
 
 
@@ -1814,7 +1915,7 @@
 
       /*
         Hide tap hint after
-        the opening card.
+        the opening scene.
       */
 
       if (
@@ -1912,7 +2013,6 @@
 
       /*
         PHASE 4
-        IMPORTANT:
         SHOW THE JOB MESSAGE
         AFTER THE BLAST.
       */
@@ -1935,8 +2035,8 @@
 
       /*
         PHASE 5
-        Keep the message visible.
-        Then move to the story.
+        Keep message visible,
+        then continue.
       */
 
       setTimeout(
@@ -1964,34 +2064,41 @@
       event => {
 
         /*
+          Keep background music alive.
+        */
+
+        startMusic();
+
+
+        /*
           Don't interfere with video
-          controls if they are ever enabled.
+          elements.
         */
 
         if (
           event.target.closest("video")
         ) {
+
           return;
+
         }
 
 
         /*
-          Tapping the meteor scene
-          does nothing.
-
-          Let the cinematic sequence
-          play automatically.
+          Meteor scene plays automatically.
         */
 
         if (
           currentScene === 0
         ) {
+
           return;
+
         }
 
 
         /*
-          Tap moves to the next card.
+          Tap moves to next card.
         */
 
         if (
@@ -2017,19 +2124,28 @@
       "touchstart",
       () => {
 
+        startMusic();
+
+
         const activeScene =
           scenes[currentScene];
+
 
         if (!activeScene) {
           return;
         }
+
 
         activeScene
           .querySelectorAll(
             ".slide-video"
           )
           .forEach(
-            video => playVideo(video)
+            video => {
+
+              playVideo(video);
+
+            }
           );
 
       },
@@ -2046,6 +2162,14 @@
     window.addEventListener(
       "keydown",
       event => {
+
+        /*
+          Keyboard interaction also
+          starts the music if needed.
+        */
+
+        startMusic();
+
 
         if (
           event.key === "ArrowRight" ||
@@ -2101,6 +2225,8 @@
       () => {
 
         showScene(0);
+
+        startMusic();
 
       }
     );
