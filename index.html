@@ -1,1193 +1,2111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#070414">
-<title>A little surprise for Harshini ✨</title>
-
-<style>
-*{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-}
-
-body{
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#070414;
-  color:#281536;
-}
-
-#app{
-  position:fixed;
-  inset:0;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 25%,#472477 0,#1b103b 35%,#070414 78%);
-}
-
-/* MOVING STARS */
-#app:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  opacity:.7;
-  background-image:
-    radial-gradient(circle,#fff 1px,transparent 1.5px),
-    radial-gradient(circle,#ffb4d3 1px,transparent 1.5px);
-  background-size:83px 83px,137px 137px;
-  background-position:13px 19px,71px 43px;
-  animation:stars 18s linear infinite;
-}
-
-@keyframes stars{
-  to{
-    background-position:96px 102px,12px 3px;
-  }
-}
-
-/* PROGRESS */
-.progress{
-  position:fixed;
-  z-index:100;
-  top:max(18px,env(safe-area-inset-top));
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:6px;
-  padding:6px 9px;
-  border-radius:999px;
-  background:#ffffff20;
-  backdrop-filter:blur(12px);
-}
-
-.dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#ffc2dd8c;
-  transition:.35s;
-}
-
-.dot.active{
-  width:25px;
-  background:#ff72a8;
-}
-
-/* SCENES */
-.scene{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  padding:76px 18px 28px;
-  opacity:0;
-  pointer-events:none;
-  transform:scale(1.02);
-  transition:opacity .7s ease,transform .7s ease;
-}
-
-.scene.active{
-  opacity:1;
-  pointer-events:auto;
-  transform:scale(1);
-}
-
-/* CARD */
-.card{
-  position:relative;
-  z-index:5;
-  width:min(430px,91vw);
-  max-height:82vh;
-  overflow:hidden;
-  padding:20px 19px 19px;
-  border:1px solid #ffffffd9;
-  border-radius:28px;
-  background:#fff9f7f5;
-  box-shadow:0 28px 100px #0008;
-  text-align:center;
-}
-
-.kicker{
-  margin-bottom:11px;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:#a72c61;
-}
-
-.media{
-  width:min(300px,74vw);
-  aspect-ratio:1;
-  margin:0 auto 14px;
-  overflow:hidden;
-  border-radius:21px;
-  background:#160c2e;
-  box-shadow:0 12px 35px #19052335;
-}
-
-.media video{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.title{
-  margin:5px 0 8px;
-  font-family:Georgia,serif;
-  font-size:clamp(25px,6.5vw,38px);
-  line-height:1.08;
-  color:#9f2057;
-}
-
-.subtitle{
-  margin:0 auto;
-  max-width:350px;
-  font-size:14px;
-  line-height:1.5;
-  color:#705e77;
-}
-
-.small-note{
-  margin:10px auto 0;
-  max-width:340px;
-  font-size:12px;
-  line-height:1.45;
-  color:#846e87;
-}
-
-/* =========================
-   METEOR INTRO
-========================= */
-
-#meteorScene{
-  background:
-    radial-gradient(circle at 50% 45%,#7135aa45,transparent 32%),
-    radial-gradient(circle at 80% 10%,#ff56a11f,transparent 25%);
-}
-
-.space{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-}
-
-/* distant glow */
-.meteor{
-  position:absolute;
-  left:-15vw;
-  top:8vh;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  opacity:0;
-
-  background:
-    radial-gradient(
-      circle at 34% 28%,
-      #fff 0 5%,
-      #fffbd7 7%,
-      #ffd45c 20%,
-      #ff7337 43%,
-      #d52c43 64%,
-      transparent 73%
-    );
-
-  box-shadow:
-    0 0 18px 8px #ffb34eee,
-    0 0 45px 17px #ff5b738c,
-    0 0 90px 30px #ff7b3d55;
-
-  transform:rotate(-28deg);
-}
-
-.meteor:before{
-  content:"";
-  position:absolute;
-  width:330px;
-  height:34px;
-  right:20px;
-  top:3px;
-  border-radius:100%;
-  transform:rotate(-4deg);
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      #ff6d4318 15%,
-      #ff963f65 42%,
-      #ffd76bc4 72%,
-      #fff8dfff 100%
-    );
-
-  filter:blur(7px);
-}
-
-.meteor:after{
-  content:"";
-  position:absolute;
-  width:150px;
-  height:150px;
-  left:-55px;
-  top:-55px;
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      #fff5b988,
-      #ff9e4538 35%,
-      transparent 70%
-    );
-
-  filter:blur(9px);
-}
-
-.meteor.fly{
-  animation:meteorFly 3.3s cubic-bezier(.12,.68,.15,1) forwards;
-}
-
-@keyframes meteorFly{
-
-  0%{
-    opacity:0;
-    transform:translate3d(0,0,0) rotate(-28deg) scale(.18);
-  }
-
-  8%{
-    opacity:1;
-  }
-
-  35%{
-    transform:translate3d(24vw,17vh,0) rotate(-28deg) scale(.55);
-  }
-
-  65%{
-    transform:translate3d(62vw,37vh,0) rotate(-28deg) scale(1.25);
-  }
-
-  86%{
-    transform:translate3d(86vw,52vh,0) rotate(-28deg) scale(1.9);
-    opacity:1;
-  }
-
-  100%{
-    transform:translate3d(112vw,68vh,0) rotate(-28deg) scale(2.8);
-    opacity:1;
-  }
-}
-
-/* IMPACT */
-.impact{
-  position:absolute;
-  left:50%;
-  top:58%;
-  width:20px;
-  height:20px;
-  border-radius:50%;
-  opacity:0;
-  transform:translate(-50%,-50%);
-
-  background:#fff;
-
-  box-shadow:
-    0 0 15px 8px #fff,
-    0 0 45px 20px #ffb23f,
-    0 0 100px 45px #ff4f7d;
-}
-
-.impact.blast{
-  animation:impactBlast 1.15s ease-out forwards;
-}
-
-@keyframes impactBlast{
-
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.1);
-  }
-
-  8%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-  }
-
-  30%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(7);
-  }
-
-  55%{
-    opacity:.9;
-    transform:translate(-50%,-50%) scale(15);
-  }
-
-  100%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(2);
-  }
-}
-
-/* SHOCKWAVE */
-.shockwave{
-  position:absolute;
-  left:50%;
-  top:58%;
-  width:40px;
-  height:40px;
-  border:3px solid #ffe7b4;
-  border-radius:50%;
-  opacity:0;
-  transform:translate(-50%,-50%);
-  box-shadow:0 0 25px #ffb75c;
-}
-
-.shockwave.blast{
-  animation:shock 1.5s ease-out forwards;
-}
-
-@keyframes shock{
-
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.1);
-  }
-
-  10%{
-    opacity:1;
-  }
-
-  100%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(28);
-  }
-}
-
-/* SECONDARY RING */
-.shockwave.two{
-  width:20px;
-  height:20px;
-  border-color:#ff91bb;
-}
-
-.shockwave.two.blast{
-  animation:shockTwo 1.8s .12s ease-out forwards;
-}
-
-@keyframes shockTwo{
-
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.1);
-  }
-
-  15%{
-    opacity:.9;
-  }
-
-  100%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(42);
-  }
-}
-
-/* FLASH */
-.flash{
-  position:absolute;
-  inset:0;
-  z-index:15;
-  background:#fff9df;
-  opacity:0;
-  pointer-events:none;
-}
-
-.flash.blast{
-  animation:flash .8s ease-out forwards;
-}
-
-@keyframes flash{
-
-  0%{opacity:0}
-
-  12%{opacity:1}
-
-  25%{opacity:.75}
-
-  100%{opacity:0}
-}
-
-/* CAMERA SHAKE */
-#meteorScene.shaking .space,
-#meteorScene.shaking .intro-copy,
-#meteorScene.shaking .impact-message{
-  animation:cameraShake .55s ease-out;
-}
-
-@keyframes cameraShake{
-
-  0%{transform:translate(0,0)}
-
-  15%{transform:translate(-8px,5px)}
-
-  30%{transform:translate(7px,-5px)}
-
-  45%{transform:translate(-5px,-4px)}
-
-  60%{transform:translate(5px,4px)}
-
-  75%{transform:translate(-3px,2px)}
-
-  100%{transform:translate(0,0)}
-}
-
-/* OPENING TEXT */
-.intro-copy{
-  position:absolute;
-  z-index:20;
-  left:50%;
-  top:48%;
-  width:min(520px,88vw);
-  transform:translate(-50%,-50%);
-  text-align:center;
-  color:#fff;
-  opacity:0;
-  transition:opacity .8s;
-}
-
-.intro-copy.show{
-  opacity:1;
-}
-
-.intro-kicker{
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:.22em;
-  color:#ff9ec4;
-  text-transform:uppercase;
-}
-
-.intro-copy h1{
-  margin:13px 0 9px;
-  font-family:Georgia,serif;
-  font-size:clamp(38px,9vw,70px);
-  line-height:.98;
-  text-shadow:0 8px 40px #ff338e47;
-}
-
-.intro-copy p{
-  margin:0 auto;
-  max-width:420px;
-  font-size:15px;
-  line-height:1.6;
-  color:#e9dced;
-}
-
-/* IMPACT MESSAGE */
-.impact-message{
-  position:absolute;
-  z-index:30;
-  left:50%;
-  top:57%;
-  transform:translate(-50%,-50%) scale(.65);
-  opacity:0;
-  width:min(680px,90vw);
-  text-align:center;
-  color:#fff;
-}
-
-.impact-message.show{
-  animation:impactText 1.1s .05s cubic-bezier(.17,.84,.3,1) forwards;
-}
-
-.impact-message .tiny{
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:.2em;
-  color:#ffc0da;
-  text-transform:uppercase;
-}
-
-.impact-message h2{
-  margin:12px 0 8px;
-  font-family:Georgia,serif;
-  font-size:clamp(35px,8vw,64px);
-  line-height:1;
-}
-
-.impact-message p{
-  margin:0;
-  color:#eadff2;
-  font-size:15px;
-  line-height:1.5;
-}
-
-@keyframes impactText{
-  to{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-  }
-}
-
-/* FINAL */
-.final-scene{
-  background:
-    radial-gradient(circle at 50% 28%,#ff5fa629,transparent 30%),
-    radial-gradient(circle at 20% 70%,#6d49d633,transparent 30%);
-}
-
-.float{
-  position:absolute;
-  z-index:1;
-  font-size:20px;
-  color:#ff8fbd;
-  opacity:.65;
-  animation:floatUp 7s linear infinite;
-}
-
-.f1{left:9%;bottom:-30px}
-.f2{left:82%;bottom:-40px;animation-delay:2s}
-.f3{left:25%;bottom:-30px;animation-delay:4s}
-.f4{left:68%;bottom:-30px;animation-delay:1s}
-
-@keyframes floatUp{
-  to{
-    transform:translateY(-110vh) rotate(18deg);
-    opacity:0;
-  }
-}
-
-/* MOBILE */
-@media(max-width:520px){
-
-  .scene{
-    padding-top:68px;
-    padding-bottom:20px;
-  }
-
-  .card{
-    width:min(400px,92vw);
-    padding:17px 15px 17px;
-    max-height:84vh;
-  }
-
-  .media{
-    width:min(280px,72vw);
-    margin-bottom:11px;
-  }
-
-  .title{
-    font-size:clamp(24px,7vw,34px);
-  }
-
-  .subtitle{
-    font-size:13.5px;
-  }
-
-  .small-note{
-    font-size:11.5px;
-  }
-}
-
-/* REDUCED MOTION */
-@media(prefers-reduced-motion:reduce){
-
-  *,
-  *:before,
-  *:after{
-    animation:none!important;
-    transition:none!important;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#080413">
+
+  <title>For Harshini 💗</title>
+
+  <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background: #080413;
+      color: white;
+    }
+
+    button,
+    video {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    /* =========================================================
+       MAIN APP
+    ========================================================= */
+
+    #app {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 50% 30%,
+          #45206d 0%,
+          #211038 35%,
+          #0b0615 72%,
+          #05030a 100%
+        );
+    }
+
+
+    /* =========================================================
+       STAR FIELD
+    ========================================================= */
+
+    .stars,
+    .stars::before,
+    .stars::after {
+      position: absolute;
+      inset: -100%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .stars {
+      opacity: 0.65;
+
+      background-image:
+        radial-gradient(circle, #ffffff 1px, transparent 1.5px),
+        radial-gradient(circle, #ffb8d7 1px, transparent 1.5px),
+        radial-gradient(circle, #bca7ff 1px, transparent 1.5px);
+
+      background-size:
+        90px 90px,
+        150px 150px,
+        220px 220px;
+
+      background-position:
+        10px 20px,
+        70px 100px,
+        130px 40px;
+
+      animation: starDrift 28s linear infinite;
+    }
+
+    @keyframes starDrift {
+      to {
+        transform: translate3d(100px, 80px, 0);
+      }
+    }
+
+
+    /* =========================================================
+       PROGRESS DOTS
+    ========================================================= */
+
+    .progress {
+      position: fixed;
+      z-index: 200;
+
+      top: max(17px, env(safe-area-inset-top));
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      padding: 7px 10px;
+
+      border-radius: 999px;
+
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .progress-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: rgba(255, 185, 214, 0.35);
+
+      transition:
+        width 0.35s ease,
+        background 0.35s ease,
+        transform 0.35s ease;
+    }
+
+    .progress-dot.active {
+      width: 25px;
+
+      background: #ff78aa;
+
+      transform: scaleY(1.05);
+    }
+
+
+    /* =========================================================
+       SCENES
+    ========================================================= */
+
+    .scene {
+      position: absolute;
+      inset: 0;
+
+      display: grid;
+      place-items: center;
+
+      padding:
+        72px
+        16px
+        max(20px, env(safe-area-inset-bottom));
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      transform: scale(1.025);
+
+      transition:
+        opacity 0.65s ease,
+        transform 0.65s ease,
+        visibility 0.65s ease;
+    }
+
+    .scene.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+
+      transform: scale(1);
+    }
+
+
+    /* =========================================================
+       METEOR SCENE
+    ========================================================= */
+
+    #meteorScene {
+      background:
+        radial-gradient(
+          circle at 50% 52%,
+          rgba(143, 63, 194, 0.22),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 80% 15%,
+          rgba(255, 70, 143, 0.13),
+          transparent 27%
+        );
+    }
+
+    .space {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+
+    /* =========================================================
+       METEOR
+    ========================================================= */
+
+    .meteor {
+      position: absolute;
+
+      left: -100px;
+      top: 5vh;
+
+      width: 42px;
+      height: 42px;
+
+      border-radius: 50%;
+
+      opacity: 0;
+
+      background:
+        radial-gradient(
+          circle at 33% 28%,
+          #ffffff 0%,
+          #fffbd6 8%,
+          #ffd365 22%,
+          #ff803f 43%,
+          #df3049 65%,
+          transparent 73%
+        );
+
+      box-shadow:
+        0 0 16px 8px rgba(255, 210, 91, 0.9),
+        0 0 45px 17px rgba(255, 102, 75, 0.65),
+        0 0 95px 30px rgba(255, 75, 133, 0.25);
+
+      transform: rotate(-28deg);
+    }
+
+    .meteor::before {
+      content: "";
+
+      position: absolute;
+
+      width: 360px;
+      height: 34px;
+
+      right: 18px;
+      top: 4px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 92, 65, 0.10) 20%,
+          rgba(255, 151, 64, 0.48) 48%,
+          rgba(255, 220, 117, 0.85) 76%,
+          rgba(255, 255, 230, 0.98) 100%
+        );
+
+      filter: blur(7px);
+    }
+
+    .meteor::after {
+      content: "";
+
+      position: absolute;
+
+      width: 145px;
+      height: 145px;
+
+      left: -53px;
+      top: -53px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255, 245, 178, 0.60),
+          rgba(255, 143, 66, 0.20) 35%,
+          transparent 72%
+        );
+
+      filter: blur(8px);
+    }
+
+    .meteor.fly {
+      animation:
+        meteorFlight 3.7s
+        cubic-bezier(0.12, 0.72, 0.12, 1)
+        forwards;
+    }
+
+    @keyframes meteorFlight {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translate3d(0, 0, 0)
+          rotate(-28deg)
+          scale(0.15);
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      35% {
+        transform:
+          translate3d(27vw, 17vh, 0)
+          rotate(-28deg)
+          scale(0.55);
+      }
+
+      65% {
+        transform:
+          translate3d(63vw, 35vh, 0)
+          rotate(-28deg)
+          scale(1.25);
+      }
+
+      87% {
+        transform:
+          translate3d(86vw, 51vh, 0)
+          rotate(-28deg)
+          scale(1.9);
+      }
+
+      100% {
+        transform:
+          translate3d(113vw, 68vh, 0)
+          rotate(-28deg)
+          scale(3);
+      }
+    }
+
+
+    /* =========================================================
+       IMPACT
+    ========================================================= */
+
+    .impact {
+      position: absolute;
+
+      left: 50%;
+      top: 58%;
+
+      width: 30px;
+      height: 30px;
+
+      border-radius: 50%;
+
+      opacity: 0;
+
+      transform: translate(-50%, -50%);
+
+      background: white;
+
+      box-shadow:
+        0 0 15px 8px white,
+        0 0 50px 24px #ffbb42,
+        0 0 110px 50px #ff4f83;
+    }
+
+    .impact.blast {
+      animation:
+        impactBlast
+        1.35s
+        ease-out
+        forwards;
+    }
+
+    @keyframes impactBlast {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(0.1);
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      25% {
+        transform:
+          translate(-50%, -50%)
+          scale(5);
+      }
+
+      50% {
+        opacity: 0.95;
+
+        transform:
+          translate(-50%, -50%)
+          scale(15);
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(2);
+      }
+    }
+
+
+    /* =========================================================
+       SHOCKWAVES
+    ========================================================= */
+
+    .shockwave {
+      position: absolute;
+
+      left: 50%;
+      top: 58%;
+
+      width: 45px;
+      height: 45px;
+
+      border: 3px solid #ffe8bd;
+      border-radius: 50%;
+
+      opacity: 0;
+
+      transform: translate(-50%, -50%);
+
+      box-shadow:
+        0 0 25px rgba(255, 188, 91, 0.9);
+    }
+
+    .shockwave.blast {
+      animation:
+        shockwave 1.55s
+        ease-out
+        forwards;
+    }
+
+    @keyframes shockwave {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(0.1);
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(30);
+      }
+    }
+
+    .shockwave.second {
+      width: 25px;
+      height: 25px;
+
+      border-color: #ff8db9;
+    }
+
+    .shockwave.second.blast {
+      animation:
+        shockwaveSecond
+        1.9s
+        0.1s
+        ease-out
+        forwards;
+    }
+
+    @keyframes shockwaveSecond {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(0.1);
+      }
+
+      12% {
+        opacity: 0.9;
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(43);
+      }
+    }
+
+
+    /* =========================================================
+       SCREEN FLASH
+    ========================================================= */
+
+    .flash {
+      position: absolute;
+      inset: 0;
+
+      z-index: 30;
+
+      background:
+        radial-gradient(
+          circle at 50% 58%,
+          white,
+          #fff4ca 20%,
+          rgba(255, 115, 165, 0.45) 48%,
+          transparent 75%
+        );
+
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .flash.blast {
+      animation:
+        screenFlash
+        1.1s
+        ease-out
+        forwards;
+    }
+
+    @keyframes screenFlash {
+
+      0% {
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      22% {
+        opacity: 0.72;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+
+    /* =========================================================
+       CAMERA SHAKE
+    ========================================================= */
+
+    #meteorScene.shaking .space {
+      animation:
+        cameraShake
+        0.65s
+        ease-out;
+    }
+
+    @keyframes cameraShake {
+
+      0% {
+        transform: translate(0, 0);
+      }
+
+      12% {
+        transform: translate(-9px, 6px);
+      }
+
+      25% {
+        transform: translate(8px, -7px);
+      }
+
+      38% {
+        transform: translate(-7px, -5px);
+      }
+
+      52% {
+        transform: translate(6px, 6px);
+      }
+
+      68% {
+        transform: translate(-4px, 3px);
+      }
+
+      82% {
+        transform: translate(3px, -2px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+
+    /* =========================================================
+       OPENING TEXT
+    ========================================================= */
+
+    .intro-copy {
+      position: absolute;
+
+      z-index: 20;
+
+      left: 50%;
+      top: 45%;
+
+      width: min(520px, 88vw);
+
+      transform: translate(-50%, -50%);
+
+      text-align: center;
+
+      opacity: 0;
+
+      transition: opacity 0.8s ease;
+    }
+
+    .intro-copy.show {
+      opacity: 1;
+    }
+
+    .intro-small {
+      font-size: 10px;
+      font-weight: 900;
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+
+      color: #ff9fc4;
+    }
+
+    .intro-copy h1 {
+      margin-top: 13px;
+
+      font-family: Georgia, serif;
+
+      font-size:
+        clamp(38px, 10vw, 72px);
+
+      line-height: 0.98;
+
+      text-shadow:
+        0 0 30px rgba(255, 93, 160, 0.35),
+        0 10px 45px rgba(0, 0, 0, 0.5);
+    }
+
+    .intro-copy p {
+      margin-top: 14px;
+
+      color: #e8d9ee;
+
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+
+    /* =========================================================
+       JOB CRACKED MESSAGE
+    ========================================================= */
+
+    .impact-message {
+      position: absolute;
+
+      z-index: 60;
+
+      left: 50%;
+      top: 56%;
+
+      width: min(700px, 91vw);
+
+      text-align: center;
+
+      transform:
+        translate(-50%, -50%)
+        scale(0.55);
+
+      opacity: 0;
+
+      pointer-events: none;
+    }
+
+    .impact-message.show {
+      animation:
+        jobReveal
+        1.1s
+        cubic-bezier(0.16, 0.84, 0.25, 1)
+        forwards;
+    }
+
+    .impact-message .mission {
+      font-size: 10px;
+
+      font-weight: 900;
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+
+      color: #ffc0da;
+    }
+
+    .impact-message h2 {
+      margin-top: 13px;
+
+      font-family: Georgia, serif;
+
+      font-size:
+        clamp(38px, 9vw, 68px);
+
+      line-height: 0.98;
+
+      color: #ffffff;
+
+      text-shadow:
+        0 0 18px rgba(255, 98, 163, 0.9),
+        0 0 50px rgba(255, 98, 163, 0.5),
+        0 10px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .impact-message p {
+      margin-top: 14px;
+
+      color: #f1e3f0;
+
+      font-size:
+        clamp(13px, 3.7vw, 17px);
+
+      line-height: 1.5;
+    }
+
+    @keyframes jobReveal {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(0.55);
+      }
+
+      65% {
+        opacity: 1;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1.06);
+      }
+
+      100% {
+        opacity: 1;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+    }
+
+
+    /* =========================================================
+       CARD
+    ========================================================= */
+
+    .card {
+      position: relative;
+      z-index: 10;
+
+      width: min(430px, 92vw);
+
+      max-height: 84vh;
+
+      overflow: hidden;
+
+      padding: 18px 16px 19px;
+
+      border-radius: 28px;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.88);
+
+      background:
+        rgba(255, 250, 249, 0.965);
+
+      box-shadow:
+        0 28px 100px rgba(0, 0, 0, 0.48);
+
+      color: #29142f;
+
+      text-align: center;
+    }
+
+    .kicker {
+      margin-bottom: 11px;
+
+      font-size: 10px;
+
+      font-weight: 900;
+
+      letter-spacing: 0.16em;
+
+      text-transform: uppercase;
+
+      color: #a52d61;
+    }
+
+
+    /* =========================================================
+       VIDEO
+    ========================================================= */
+
+    .media {
+      width: min(290px, 73vw);
+
+      aspect-ratio: 1 / 1;
+
+      margin:
+        0 auto
+        13px;
+
+      overflow: hidden;
+
+      border-radius: 21px;
+
+      background:
+        radial-gradient(
+          circle at 50% 30%,
+          #38215c,
+          #11091e
+        );
+
+      box-shadow:
+        0 14px 40px rgba(20, 3, 30, 0.20);
+    }
+
+    .slide-video {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      background: #11091e;
+    }
+
+
+    /* =========================================================
+       CARD TEXT
+    ========================================================= */
+
+    .title {
+      margin: 4px 0 8px;
+
+      font-family: Georgia, serif;
+
+      font-size:
+        clamp(25px, 6.8vw, 37px);
+
+      line-height: 1.08;
+
+      color: #9e2158;
+    }
+
+    .subtitle {
+      width: min(360px, 100%);
+
+      margin: 0 auto;
+
+      font-size: 13.5px;
+
+      line-height: 1.52;
+
+      color: #715d76;
+    }
+
+    .small-note {
+      width: min(350px, 100%);
+
+      margin: 10px auto 0;
+
+      font-size: 11.5px;
+
+      line-height: 1.45;
+
+      color: #8a738d;
+    }
+
+
+    /* =========================================================
+       FINAL SCENE
+    ========================================================= */
+
+    #finalScene {
+      background:
+        radial-gradient(
+          circle at 50% 30%,
+          rgba(255, 90, 157, 0.16),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 20% 75%,
+          rgba(116, 73, 211, 0.18),
+          transparent 30%
+        );
+    }
+
+
+    /* =========================================================
+       FLOATING HEARTS
+    ========================================================= */
+
+    .heart {
+      position: absolute;
+
+      z-index: 2;
+
+      bottom: -40px;
+
+      color: #ff86b6;
+
+      opacity: 0.65;
+
+      font-size: 22px;
+
+      pointer-events: none;
+
+      animation:
+        floatHeart
+        7s
+        linear
+        infinite;
+    }
+
+    .heart.one {
+      left: 9%;
+    }
+
+    .heart.two {
+      left: 80%;
+
+      animation-delay: 1.8s;
+    }
+
+    .heart.three {
+      left: 28%;
+
+      animation-delay: 3.5s;
+    }
+
+    .heart.four {
+      left: 67%;
+
+      animation-delay: 5s;
+    }
+
+    @keyframes floatHeart {
+
+      0% {
+        transform:
+          translateY(0)
+          rotate(0deg);
+
+        opacity: 0;
+      }
+
+      12% {
+        opacity: 0.65;
+      }
+
+      100% {
+        transform:
+          translateY(-110vh)
+          rotate(25deg);
+
+        opacity: 0;
+      }
+    }
+
+
+    /* =========================================================
+       TAP HINT
+    ========================================================= */
+
+    .tap-hint {
+      position: fixed;
+
+      z-index: 150;
+
+      left: 50%;
+      bottom: max(15px, env(safe-area-inset-bottom));
+
+      transform: translateX(-50%);
+
+      padding: 7px 12px;
+
+      border-radius: 999px;
+
+      background: rgba(255, 255, 255, 0.10);
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+      color: rgba(255, 255, 255, 0.62);
+
+      font-size: 10px;
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      transition:
+        opacity 0.5s ease;
+    }
+
+    .tap-hint.hidden {
+      opacity: 0;
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 520px) {
+
+      .scene {
+        padding-top: 66px;
+        padding-left: 13px;
+        padding-right: 13px;
+      }
+
+      .card {
+        width: 93vw;
+
+        max-height: 83vh;
+
+        padding:
+          16px
+          14px
+          17px;
+      }
+
+      .media {
+        width: min(275px, 71vw);
+      }
+
+      .title {
+        font-size:
+          clamp(24px, 7vw, 34px);
+      }
+
+      .subtitle {
+        font-size: 13px;
+      }
+
+      .impact-message h2 {
+        font-size:
+          clamp(35px, 10vw, 62px);
+      }
+    }
+
+
+    /* =========================================================
+       VERY SMALL PHONES
+    ========================================================= */
+
+    @media (max-height: 700px) {
+
+      .media {
+        width: min(235px, 61vw);
+      }
+
+      .card {
+        padding-top: 13px;
+        padding-bottom: 14px;
+      }
+
+      .kicker {
+        margin-bottom: 7px;
+      }
+
+      .title {
+        margin-top: 2px;
+        margin-bottom: 5px;
+      }
+    }
+
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+  </style>
 </head>
+
 
 <body>
 
-<div id="app">
+  <div id="app">
 
-  <div class="progress" aria-hidden="true">
-    <i class="dot active"></i>
-    <i class="dot"></i>
-    <i class="dot"></i>
-    <i class="dot"></i>
-    <i class="dot"></i>
-    <i class="dot"></i>
+    <div class="stars"></div>
+
+
+    <!-- =======================================================
+         PROGRESS
+    ======================================================== -->
+
+    <div
+      class="progress"
+      id="progress"
+      aria-hidden="true"
+    >
+      <span class="progress-dot active"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+    </div>
+
+
+    <!-- =======================================================
+         METEOR INTRO
+    ======================================================== -->
+
+    <section
+      class="scene active"
+      id="meteorScene"
+    >
+
+      <div class="space">
+
+        <div
+          class="meteor"
+          id="meteor"
+        ></div>
+
+        <div
+          class="impact"
+          id="impact"
+        ></div>
+
+        <div
+          class="shockwave"
+          id="shockwave"
+        ></div>
+
+        <div
+          class="shockwave second"
+          id="shockwaveSecond"
+        ></div>
+
+        <div
+          class="flash"
+          id="flash"
+        ></div>
+
+      </div>
+
+
+      <!-- OPENING MESSAGE -->
+
+      <div
+        class="intro-copy"
+        id="introCopy"
+      >
+
+        <div class="intro-small">
+          A little surprise for you ✨
+        </div>
+
+        <h1>
+          Hey, Harshini.
+        </h1>
+
+        <p>
+          Something special is coming your way...
+        </p>
+
+      </div>
+
+
+      <!-- JOB REVEAL -->
+
+      <div
+        class="impact-message"
+        id="impactMessage"
+      >
+
+        <div class="mission">
+          MISSION ACCOMPLISHED
+        </div>
+
+        <h2>
+          YOU CRACKED<br>
+          THE JOB! 🎉
+        </h2>
+
+        <p>
+          Internship completed → full-time employee unlocked. 💼
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         SLIDE 1
+    ======================================================== -->
+
+    <section class="scene">
+
+      <div class="card">
+
+        <div class="kicker">
+          You actually did it 💗
+        </div>
+
+        <div class="media">
+
+          <video
+            class="slide-video"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source
+              src="assets/you-made-it.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+        </div>
+
+        <h2 class="title">
+          The internship chapter is complete.
+        </h2>
+
+        <p class="subtitle">
+          You trained, learned, worked through the pressure
+          and finished the chapter you started.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         SLIDE 2
+    ======================================================== -->
+
+    <section class="scene">
+
+      <div class="card">
+
+        <div class="kicker">
+          And then came the moment ✨
+        </div>
+
+        <div class="media">
+
+          <video
+            class="slide-video"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source
+              src="assets/proud.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+        </div>
+
+        <h2 class="title">
+          You made it.
+        </h2>
+
+        <p class="subtitle">
+          Through the stress, interviews, waiting and
+          uncertainty, you kept going until the opportunity
+          finally became real.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         SLIDE 3
+    ======================================================== -->
+
+    <section class="scene">
+
+      <div class="card">
+
+        <div class="kicker">
+          Remember this feeling
+        </div>
+
+        <div class="media">
+
+          <video
+            class="slide-video"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source
+              src="assets/never-give-up.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+        </div>
+
+        <h2 class="title">
+          You didn't give up. 🥹
+        </h2>
+
+        <p class="subtitle">
+          Every small effort mattered.
+          Every difficult day brought you one step
+          closer to this moment.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         SLIDE 4
+    ======================================================== -->
+
+    <section class="scene">
+
+      <div class="card">
+
+        <div class="kicker">
+          The sentence we were waiting for 🎓
+        </div>
+
+        <div class="media">
+
+          <video
+            class="slide-video"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source
+              src="assets/congratulations.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+        </div>
+
+        <h2 class="title">
+          JOB CRACKED. 🥳
+        </h2>
+
+        <p class="subtitle">
+          Training → internship → experience →
+          interviews → offer → <strong>full-time employee.</strong>
+        </p>
+
+        <p class="small-note">
+          You didn't just finish an internship.
+          You earned your place in the next chapter.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         SLIDE 5
+    ======================================================== -->
+
+    <section class="scene">
+
+      <div class="card">
+
+        <div class="kicker">
+          Now we celebrate 🎀
+        </div>
+
+        <div class="media">
+
+          <video
+            class="slide-video"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source
+              src="assets/celebration.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+        </div>
+
+        <h2 class="title">
+          A new chapter starts now. ❤️
+        </h2>
+
+        <p class="subtitle">
+          Your first full-time chapter starts here.
+          Keep learning, keep growing and keep becoming
+          the person you want to be.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FINAL MESSAGE
+    ======================================================== -->
+
+    <section
+      class="scene"
+      id="finalScene"
+    >
+
+      <span class="heart one">♥</span>
+      <span class="heart two">♡</span>
+      <span class="heart three">♥</span>
+      <span class="heart four">♡</span>
+
+
+      <div class="card">
+
+        <div class="kicker">
+          From my heart 💗
+        </div>
+
+        <div class="media">
+
+          <video
+            class="slide-video"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source
+              src="assets/proud.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+        </div>
+
+        <h2 class="title">
+          Congratulations,<br>
+          Harshini! 💗
+        </h2>
+
+        <p class="subtitle">
+
+          I hope you smiled at least a little
+          while seeing this.
+
+          <br><br>
+
+          <strong>
+            I'm genuinely proud of you.
+          </strong>
+
+          <br><br>
+
+          You worked for this.
+          You earned this.
+
+          <br><br>
+
+          Now go make this new chapter yours. ✨
+
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         TAP HINT
+    ======================================================== -->
+
+    <div
+      class="tap-hint"
+      id="tapHint"
+    >
+      Tap anywhere to continue ✨
+    </div>
+
   </div>
 
-  <!-- =========================
-       METEOR OPENING
-  ========================== -->
 
-  <section class="scene active" id="meteorScene">
+  <script>
 
-    <div class="space">
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
 
-      <div class="meteor" id="meteor"></div>
+    const scenes = [
+      ...document.querySelectorAll(".scene")
+    ];
 
-      <div class="impact" id="impact"></div>
+    const dots = [
+      ...document.querySelectorAll(".progress-dot")
+    ];
 
-      <div class="shockwave" id="shockwave"></div>
+    const videos = [
+      ...document.querySelectorAll(".slide-video")
+    ];
 
-      <div class="shockwave two" id="shockwaveTwo"></div>
+    const meteorScene =
+      document.getElementById("meteorScene");
 
-      <div class="flash" id="flash"></div>
+    const meteor =
+      document.getElementById("meteor");
 
-    </div>
+    const impact =
+      document.getElementById("impact");
 
-    <div class="intro-copy" id="introCopy">
+    const shockwave =
+      document.getElementById("shockwave");
 
-      <div class="intro-kicker">
-        A little surprise for you ✨
-      </div>
+    const shockwaveSecond =
+      document.getElementById("shockwaveSecond");
 
-      <h1>Hey, Harshini.</h1>
+    const flash =
+      document.getElementById("flash");
 
-      <p>
-        Something special is coming your way...
-      </p>
+    const introCopy =
+      document.getElementById("introCopy");
 
-    </div>
+    const impactMessage =
+      document.getElementById("impactMessage");
 
-    <div class="impact-message" id="impactMessage">
+    const tapHint =
+      document.getElementById("tapHint");
 
-      <div class="tiny">
-        MISSION ACCOMPLISHED
-      </div>
 
-      <h2>
-        You cracked the job. 🎉
-      </h2>
+    /* =========================================================
+       STATE
+    ========================================================= */
 
-      <p>
-        Internship completed → full-time employee unlocked. 💼
-      </p>
+    let currentScene = 0;
 
-    </div>
+    let meteorStarted = false;
 
-  </section>
+    let slideTimer = null;
 
 
-  <!-- =========================
-       SLIDE 1
-  ========================== -->
+    /* =========================================================
+       VIDEO FUNCTIONS
+    ========================================================= */
 
-  <section class="scene">
+    function stopVideo(video) {
 
-    <div class="card">
-
-      <div class="kicker">
-        You actually did it 💗
-      </div>
-
-      <div class="media">
-<video
-  src="assets/you-made-it.mp4"
-  autoplay
-  loop
-  muted
-  playsinline
-  preload="auto">
-</video>
-      </div>
-
-      <h2 class="title">
-        The internship chapter is complete.
-      </h2>
-
-      <p class="subtitle">
-        You trained, learned, worked through the pressure
-        and finished the chapter you started.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       SLIDE 2
-  ========================== -->
-
-  <section class="scene">
-
-    <div class="card">
-
-      <div class="kicker">
-        And then came the moment ✨
-      </div>
-
-      <div class="media">
-        <video
-  src="assets/proud.mp4"
-  autoplay
-  loop
-  muted
-  playsinline
-  preload="auto">
-</video>
-      </div>
-
-      <h2 class="title">
-        You made it.
-      </h2>
-
-      <p class="subtitle">
-        Through the stress, doubts, interviews and waiting,
-        you kept going until the opportunity became real.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       SLIDE 3
-  ========================== -->
-
-  <section class="scene">
-
-    <div class="card">
-
-      <div class="kicker">
-        Remember this feeling
-      </div>
-
-      <div class="media">
-        <video
-  src="assets/never-give-up.mp4"
-  autoplay
-  loop
-  muted
-  playsinline
-  preload="auto">
-</video>
-      </div>
-
-      <h2 class="title">
-        You didn't give up. 🥹
-      </h2>
-
-      <p class="subtitle">
-        Every small effort mattered.
-        Every difficult day brought you one step closer
-        to this moment.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       SLIDE 4
-  ========================== -->
-
-  <section class="scene">
-
-    <div class="card">
-
-      <div class="kicker">
-        The sentence we were waiting for 🎓
-      </div>
-
-      <div class="media">
-        <video
-  src="assets/congratulations.mp4"
-  autoplay
-  loop
-  muted
-  playsinline
-  preload="auto">
-</video>
-      </div>
-
-      <h2 class="title">
-        JOB CRACKED. 🥳
-      </h2>
-
-      <p class="subtitle">
-        Training → internship → experience →
-        interviews → offer → <b>full-time employee.</b>
-      </p>
-
-      <p class="small-note">
-        You didn't just finish an internship.
-        You earned your place in the next chapter.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       SLIDE 5
-  ========================== -->
-
-  <section class="scene">
-
-    <div class="card">
-
-      <div class="kicker">
-        Now we celebrate 🎀
-      </div>
-
-      <div class="media">
-        <video
-  src="assets/celebration.mp4"
-  autoplay
-  loop
-  muted
-  playsinline
-  preload="auto">
-</video>
-      </div>
-
-      <h2 class="title">
-        You're officially starting a new chapter. ❤️
-      </h2>
-
-      <p class="subtitle">
-        Your first full-time chapter starts now.
-        Keep learning, keep growing and keep becoming
-        the person you want to be.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       FINAL
-  ========================== -->
-
-  <section class="scene final-scene">
-
-    <span class="float f1">♡</span>
-    <span class="float f2">♥</span>
-    <span class="float f3">♡</span>
-    <span class="float f4">♥</span>
-
-    <div class="card">
-
-      <div class="kicker">
-        From my heart
-      </div>
-
-      <div class="media">
-        <video
-  src="assets/proud.mp4"
-  autoplay
-  loop
-  muted
-  playsinline
-  preload="auto">
-</video>
-      </div>
-
-      <h2 class="title">
-        Congratulations,<br>
-        Harshini! 💗
-      </h2>
-
-      <p class="subtitle">
-        I hope you smiled at least a little while seeing this.
-        <br><br>
-
-        <b>I'm genuinely proud of you.</b>
-        <br><br>
-
-        You worked for this.
-        You earned this.
-        Now go make this new chapter yours. ✨
-      </p>
-
-    </div>
-
-  </section>
-
-</div>
-
-
-<script>
-
-const scenes = [...document.querySelectorAll(".scene")];
-
-const dots = [...document.querySelectorAll(".dot")];
-
-const videos = [...document.querySelectorAll("video")];
-
-let current = 0;
-
-let timer = null;
-
-let meteorStarted = false;
-
-
-/* =========================
-   VIDEO CONTROL
-========================= */
-
-function playVideo(video){
-
-  if(!video) return;
-
-  try{
-    video.currentTime = 0;
-  }catch(e){}
-
-  video.muted = true;
-  video.playsInline = true;
-
-  const promise = video.play();
-
-  if(promise && promise.catch){
-    promise.catch(()=>{});
-  }
-}
-
-
-function stopOtherVideos(activeScene){
-
-  videos.forEach(video=>{
-
-    if(!activeScene.contains(video)){
-
-      video.pause();
-
-      try{
+      try {
+        video.pause();
         video.currentTime = 0;
-      }catch(e){}
+      } catch (error) {
+        // Ignore browser-specific media errors.
+      }
 
     }
 
-  });
 
-}
+    function playVideo(video) {
+
+      if (!video) {
+        return;
+      }
+
+      try {
+
+        video.muted = true;
+
+        video.setAttribute(
+          "muted",
+          ""
+        );
+
+        video.setAttribute(
+          "playsinline",
+          ""
+        );
+
+        /*
+          Important:
+          load() makes Safari/GitHub Pages
+          re-read the MP4 when the slide
+          becomes visible.
+        */
+
+        video.load();
+
+        const promise =
+          video.play();
+
+        if (promise) {
+
+          promise.catch(() => {
+            /*
+              Autoplay can be blocked by
+              some browser configurations.
+
+              The user can still tap the page,
+              and the retry below will play it.
+            */
+          });
+
+        }
+
+      } catch (error) {
+        // Ignore media errors.
+      }
+
+    }
 
 
-/* =========================
-   SHOW SCENE
-========================= */
+    function prepareActiveVideos(scene) {
 
-function showScene(index){
+      videos.forEach(video => {
 
-  current = Math.max(
-    0,
-    Math.min(index, scenes.length - 1)
-  );
+        if (
+          !scene.contains(video)
+        ) {
 
-  scenes.forEach((scene,i)=>{
+          stopVideo(video);
 
-    scene.classList.toggle(
-      "active",
-      i === current
+        }
+
+      });
+
+
+      const activeVideos =
+        scene.querySelectorAll(
+          ".slide-video"
+        );
+
+
+      activeVideos.forEach(video => {
+
+        playVideo(video);
+
+      });
+
+    }
+
+
+    /* =========================================================
+       SHOW SCENE
+    ========================================================= */
+
+    function showScene(index) {
+
+      if (
+        index < 0 ||
+        index >= scenes.length
+      ) {
+        return;
+      }
+
+
+      clearTimeout(slideTimer);
+
+
+      scenes.forEach(
+        (scene, sceneIndex) => {
+
+          scene.classList.toggle(
+            "active",
+            sceneIndex === index
+          );
+
+        }
+      );
+
+
+      dots.forEach(
+        (dot, dotIndex) => {
+
+          dot.classList.toggle(
+            "active",
+            dotIndex === index
+          );
+
+        }
+      );
+
+
+      currentScene = index;
+
+
+      const activeScene =
+        scenes[currentScene];
+
+
+      prepareActiveVideos(
+        activeScene
+      );
+
+
+      /*
+        Meteor scene has its own
+        timeline.
+      */
+
+      if (
+        currentScene === 0
+      ) {
+
+        runMeteorSequence();
+
+        return;
+      }
+
+
+      /*
+        Normal cards automatically
+        continue after a few seconds.
+      */
+
+      const duration =
+        currentScene === scenes.length - 1
+          ? 10000
+          : 6500;
+
+
+      slideTimer =
+        setTimeout(
+          () => {
+
+            if (
+              currentScene <
+              scenes.length - 1
+            ) {
+
+              showScene(
+                currentScene + 1
+              );
+
+            }
+
+          },
+          duration
+        );
+
+
+      /*
+        Hide tap hint after
+        the opening card.
+      */
+
+      if (
+        currentScene > 0
+      ) {
+
+        tapHint.classList.add(
+          "hidden"
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       METEOR SEQUENCE
+    ========================================================= */
+
+    function runMeteorSequence() {
+
+      if (meteorStarted) {
+        return;
+      }
+
+      meteorStarted = true;
+
+
+      /*
+        PHASE 1
+        Opening text.
+      */
+
+      setTimeout(
+        () => {
+
+          introCopy.classList.add(
+            "show"
+          );
+
+        },
+        500
+      );
+
+
+      /*
+        PHASE 2
+        Meteor begins flying.
+      */
+
+      setTimeout(
+        () => {
+
+          meteor.classList.add(
+            "fly"
+          );
+
+        },
+        1200
+      );
+
+
+      /*
+        PHASE 3
+        IMPACT.
+      */
+
+      setTimeout(
+        () => {
+
+          impact.classList.add(
+            "blast"
+          );
+
+          shockwave.classList.add(
+            "blast"
+          );
+
+          shockwaveSecond.classList.add(
+            "blast"
+          );
+
+          flash.classList.add(
+            "blast"
+          );
+
+          meteorScene.classList.add(
+            "shaking"
+          );
+
+        },
+        4550
+      );
+
+
+      /*
+        PHASE 4
+        IMPORTANT:
+        SHOW THE JOB MESSAGE
+        AFTER THE BLAST.
+      */
+
+      setTimeout(
+        () => {
+
+          introCopy.classList.remove(
+            "show"
+          );
+
+          impactMessage.classList.add(
+            "show"
+          );
+
+        },
+        4850
+      );
+
+
+      /*
+        PHASE 5
+        Keep the message visible.
+        Then move to the story.
+      */
+
+      setTimeout(
+        () => {
+
+          meteorScene.classList.remove(
+            "shaking"
+          );
+
+          showScene(1);
+
+        },
+        8500
+      );
+
+    }
+
+
+    /* =========================================================
+       USER TAP
+    ========================================================= */
+
+    document.addEventListener(
+      "click",
+      event => {
+
+        /*
+          Don't interfere with video
+          controls if they are ever enabled.
+        */
+
+        if (
+          event.target.closest("video")
+        ) {
+          return;
+        }
+
+
+        /*
+          Tapping the meteor scene
+          does nothing.
+
+          Let the cinematic sequence
+          play automatically.
+        */
+
+        if (
+          currentScene === 0
+        ) {
+          return;
+        }
+
+
+        /*
+          Tap moves to the next card.
+        */
+
+        if (
+          currentScene <
+          scenes.length - 1
+        ) {
+
+          showScene(
+            currentScene + 1
+          );
+
+        }
+
+      }
     );
 
-  });
 
-  dots.forEach((dot,i)=>{
+    /* =========================================================
+       TOUCH RETRY FOR AUTOPLAY
+    ========================================================= */
 
-    dot.classList.toggle(
-      "active",
-      i === current
+    document.addEventListener(
+      "touchstart",
+      () => {
+
+        const activeScene =
+          scenes[currentScene];
+
+        if (!activeScene) {
+          return;
+        }
+
+        activeScene
+          .querySelectorAll(
+            ".slide-video"
+          )
+          .forEach(
+            video => playVideo(video)
+          );
+
+      },
+      {
+        passive: true
+      }
     );
 
-  });
 
-  const activeScene = scenes[current];
+    /* =========================================================
+       KEYBOARD
+    ========================================================= */
 
-  stopOtherVideos(activeScene);
+    window.addEventListener(
+      "keydown",
+      event => {
 
-  activeScene
-    .querySelectorAll("video")
-    .forEach(playVideo);
+        if (
+          event.key === "ArrowRight" ||
+          event.key === " "
+        ) {
 
-  clearTimeout(timer);
+          event.preventDefault();
 
 
-  /* meteor is controlled separately */
+          if (
+            currentScene <
+            scenes.length - 1
+          ) {
 
-  if(current === 0){
+            showScene(
+              currentScene + 1
+            );
 
-    runMeteorIntro();
+          }
 
-  }else{
+        }
 
-    timer = setTimeout(
-      ()=>showScene(current + 1),
-      current === scenes.length - 1
-        ? 9000
-        : 6500
+
+        if (
+          event.key === "ArrowLeft"
+        ) {
+
+          event.preventDefault();
+
+
+          if (
+            currentScene > 1
+          ) {
+
+            showScene(
+              currentScene - 1
+            );
+
+          }
+
+        }
+
+      }
     );
 
-  }
 
-}
+    /* =========================================================
+       START
+    ========================================================= */
 
+    window.addEventListener(
+      "load",
+      () => {
 
-/* =========================
-   METEOR SEQUENCE
-========================= */
+        showScene(0);
 
-function runMeteorIntro(){
+      }
+    );
 
-  if(meteorStarted) return;
-
-  meteorStarted = true;
-
-  const scene =
-    document.getElementById("meteorScene");
-
-  const meteor =
-    document.getElementById("meteor");
-
-  const impact =
-    document.getElementById("impact");
-
-  const shock =
-    document.getElementById("shockwave");
-
-  const shockTwo =
-    document.getElementById("shockwaveTwo");
-
-  const flash =
-    document.getElementById("flash");
-
-  const intro =
-    document.getElementById("introCopy");
-
-  const message =
-    document.getElementById("impactMessage");
-
-
-  /* opening text */
-
-  setTimeout(()=>{
-    intro.classList.add("show");
-  },500);
-
-
-  /* meteor appears */
-
-  setTimeout(()=>{
-    meteor.classList.add("fly");
-  },1200);
-
-
-  /* IMPACT */
-
-  setTimeout(()=>{
-
-    impact.classList.add("blast");
-
-    shock.classList.add("blast");
-
-    shockTwo.classList.add("blast");
-
-    flash.classList.add("blast");
-
-    scene.classList.add("shaking");
-
-  },4300);
-
-
-  /* reveal message */
-
-  setTimeout(()=>{
-
-    intro.classList.remove("show");
-
-    message.classList.add("show");
-
-  },4650);
-
-
-  /* move to first story card */
-
-  setTimeout(()=>{
-
-    scene.classList.remove("shaking");
-
-    showScene(1);
-
-  },7200);
-
-}
-
-
-/* =========================
-   START
-========================= */
-
-window.addEventListener(
-  "load",
-  ()=>{
-    showScene(0);
-  }
-);
-
-
-/* =========================
-   CLICK / TOUCH
-========================= */
-
-document.addEventListener(
-  "click",
-  event=>{
-
-    if(
-      !event.target.closest("video") &&
-      current > 0 &&
-      current < scenes.length - 1
-    ){
-
-      showScene(current + 1);
-
-    }
-
-  }
-);
-
-
-/* =========================
-   KEYBOARD
-========================= */
-
-window.addEventListener(
-  "keydown",
-  event=>{
-
-    if(
-      event.key === "ArrowRight" ||
-      event.key === " "
-    ){
-
-      event.preventDefault();
-
-      showScene(current + 1);
-
-    }
-
-    if(event.key === "ArrowLeft"){
-
-      showScene(current - 1);
-
-    }
-
-  }
-);
-
-</script>
+  </script>
 
 </body>
 </html>
