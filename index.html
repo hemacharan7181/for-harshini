@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0820">
+<title>A little surprise for Harshini ✨</title>
+<style>
+:root{--pink:#ff4f8b;--deep:#190f36;--cream:#fffaf6;--ink:#3b1b35;--muted:#79566f;--gold:#ffd36a}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#09071a}
+button{font:inherit;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#app{position:fixed;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 30%,#5b347d 0,#17102f 45%,#070616 100%)}
+#app:before{content:"";position:absolute;inset:-20%;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#ffd7ef 1px,transparent 1px);background-size:70px 70px,110px 110px;background-position:10px 15px,45px 70px;opacity:.28;animation:stars 18s linear infinite}
+@keyframes stars{to{transform:translate3d(-70px,35px,0)}}
+.scene{position:absolute;inset:0;display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transform:scale(.96) translateY(18px) rotateX(2deg);transform-origin:50% 70%;transition:opacity .6s ease,transform .7s cubic-bezier(.2,.85,.25,1);perspective:1200px}
+.scene.active{opacity:1;pointer-events:auto;transform:none}
+.card{position:relative;width:min(430px,92vw);max-height:84vh;overflow:hidden;border:1px solid rgba(255,255,255,.8);border-radius:30px;padding:24px 22px 20px;background:rgba(255,250,247,.95);box-shadow:0 30px 90px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.8);text-align:center;transform:translateZ(30px)}
+.card:after{content:"";position:absolute;inset:8px;border:1px solid #f5dce9;border-radius:23px;pointer-events:none}
+.kicker{position:relative;z-index:2;display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;background:#fff0f6;color:#a62b60;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.title{position:relative;z-index:2;margin:15px 0 10px;font-family:Georgia,serif;font-weight:900;line-height:.98;font-size:clamp(34px,9vw,54px);letter-spacing:-.04em;color:#9f174f}
+.title strong{display:block;font-weight:950}.subtitle{position:relative;z-index:2;margin:0 auto 17px;max-width:340px;font-size:15px;line-height:1.55;color:var(--muted)}
+.heavy{font-weight:950;color:#a31550}.message{position:relative;z-index:2;margin:14px auto 17px;max-width:345px;font-size:16px;line-height:1.55;color:#5b3852}.message b{font-weight:950;color:#9f174f}
+.media{position:relative;z-index:2;width:min(245px,70vw);aspect-ratio:1;border-radius:24px;overflow:hidden;margin:2px auto 16px;background:#f8eaf1;box-shadow:0 12px 30px rgba(103,20,65,.13)}
+.media video,.media img{display:block;width:100%;height:100%;object-fit:cover}
+.btn{position:relative;z-index:5;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:170px;padding:13px 20px;border-radius:999px;background:linear-gradient(135deg,#d91468,#a90f4f);color:white;font-weight:900;box-shadow:0 12px 24px rgba(174,16,82,.24);transition:transform .2s ease,box-shadow .2s ease}.btn:active{transform:scale(.96)}.btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px rgba(174,16,82,.3)}
+.small{font-size:11px;color:#9b7188;margin-top:13px;position:relative;z-index:2}.progress{position:fixed;z-index:30;top:18px;left:50%;transform:translateX(-50%);display:flex;gap:5px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.15);backdrop-filter:blur(10px)}.dot{width:7px;height:7px;border-radius:50%;background:#f7c6db;opacity:.65}.dot.on{width:22px;background:#ff5c97;opacity:1}
+.float-heart{position:absolute;z-index:1;color:#ff9ec0;font-size:22px;opacity:.65;animation:float 5s ease-in-out infinite}.h1{left:9%;top:18%}.h2{right:9%;top:27%;animation-delay:1s}.h3{left:12%;bottom:20%;animation-delay:2s}.h4{right:13%;bottom:14%;animation-delay:.7s}@keyframes float{50%{transform:translateY(-18px) rotate(8deg)}}
+/* meteor intro */
+#meteorScene{background:radial-gradient(circle at 50% 45%,#312052 0,#0c0920 55%,#05040f 100%)}
+.meteor-stage{position:absolute;inset:0;overflow:hidden;perspective:900px}.meteor{position:absolute;left:-18vw;top:8vh;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff7cf 0 5%,#ffd36a 12%,#ff8a45 38%,#d32e67 68%,#5b164f 100%);box-shadow:0 0 28px 10px rgba(255,136,82,.65),0 0 100px 30px rgba(255,67,151,.25);animation:meteorFly 2.4s cubic-bezier(.2,.7,.15,1) .4s forwards;transform:rotate(-25deg)}.meteor:before{content:"";position:absolute;width:360px;height:32px;right:45px;top:22px;background:linear-gradient(90deg,transparent,rgba(255,206,115,.12),rgba(255,118,79,.65));filter:blur(7px);transform:skewX(-18deg);transform-origin:right center}.meteor:after{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(255,255,255,.18);animation:pulse 1.4s infinite}
+@keyframes meteorFly{0%{transform:translate3d(0,0,0) rotate(-25deg) scale(.7);opacity:0}12%{opacity:1}78%{transform:translate3d(75vw,55vh,0) rotate(-25deg) scale(1.1);opacity:1}100%{transform:translate3d(88vw,62vh,0) rotate(-25deg) scale(.25);opacity:0}}
+@keyframes pulse{50%{transform:scale(1.35);opacity:.2}}
+.intro-copy{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(430px,90vw);text-align:center;color:white;z-index:4}.intro-copy .mini{font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#ffc6df}.intro-copy h1{font-family:Georgia,serif;font-size:clamp(42px,11vw,70px);line-height:.94;margin:14px 0;color:white;letter-spacing:-.05em}.intro-copy p{margin:0 auto 22px;max-width:330px;color:#eadff4;line-height:1.5}.intro-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(12px)}
+/* 3d final */
+.final-scene{background:radial-gradient(circle at 50% 25%,#ffe4ef,#f6a2c2 55%,#e777a8 100%)}.final-card{background:rgba(255,255,255,.83)}.orbit{position:absolute;width:330px;height:330px;border:1px solid rgba(255,255,255,.5);border-radius:50%;animation:spin 16s linear infinite;left:50%;top:42%;transform:translate(-50%,-50%) rotateX(65deg)}.orbit:before,.orbit:after{content:"✦";position:absolute;color:#fff;top:-10px;left:50%;font-size:20px}.orbit:after{top:auto;left:auto;bottom:10px;right:5%;font-size:14px}@keyframes spin{to{transform:translate(-50%,-50%) rotateX(65deg) rotateZ(360deg)}}
+@media(max-height:700px){.card{padding:18px 18px 15px;max-height:88vh}.media{width:min(205px,56vw);margin-bottom:10px}.title{font-size:36px;margin:10px 0}.subtitle,.message{font-size:14px;margin-bottom:11px}.btn{padding:11px 18px}.small{margin-top:8px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="progress" aria-hidden="true"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+  <span class="float-heart h1">♡</span><span class="float-heart h2">♡</span><span class="float-heart h3">♥</span><span class="float-heart h4">✦</span>
+
+  <section class="scene active" id="meteorScene">
+    <div class="meteor-stage"><div class="meteor"></div></div>
+    <div class="intro-copy">
+      <div class="mini">incoming little surprise ✦</div>
+      <h1>Hey,<br>Harshini…</h1>
+      <p>A tiny meteor just crossed the sky carrying a very important message for you. ☄️💗</p>
+      <button class="btn intro-btn" data-next>Catch it ✨</button>
+    </div>
+  </section>
+
+  <section class="scene"><div class="card">
+    <div class="kicker">🐻 delivered safely</div>
+    <div class="media"><video src="assets/dudu-wave.mp4" autoplay loop muted playsinline preload="auto"></video></div>
+    <h2 class="title">YOU DID IT!<strong>🎓💗</strong></h2>
+    <p class="subtitle">Your first job. Your next chapter. And one very proud person cheering for you.</p>
+    <button class="btn" data-next>Tell me more →</button>
+  </div></section>
+
+  <section class="scene"><div class="card">
+    <div class="kicker">a little celebration hug</div>
+    <div class="media"><video src="assets/dudu-hug.mp4" autoplay loop muted playsinline preload="auto"></video></div>
+    <p class="message"><b>Harshini, I'm genuinely proud of you.</b><br><br>You worked through the stress, the doubts, the waiting… and you made it to this moment.</p>
+    <button class="btn" data-next>Next little thing 🐾</button>
+  </div></section>
+
+  <section class="scene"><div class="card">
+    <div class="kicker">remember this feeling</div>
+    <div class="media"><video src="assets/never-give-up.mp4" autoplay loop muted playsinline preload="auto"></video></div>
+    <h2 class="title" style="font-size:clamp(31px,8vw,47px)">You didn't give up. 🥹</h2>
+    <p class="subtitle">And look where that little bit of courage brought you.</p>
+    <button class="btn" data-next>Keep going →</button>
+  </div></section>
+
+  <section class="scene"><div class="card">
+    <div class="kicker">achievement unlocked</div>
+    <div class="media"><video src="assets/warrior-cat.mp4" autoplay loop muted playsinline preload="auto"></video></div>
+    <h2 class="title" style="font-size:clamp(31px,8vw,47px)">JOB CRACKED. 🎉</h2>
+    <p class="subtitle">From assignments and interviews to finally getting that beautiful sentence.</p>
+    <button class="btn" data-next>Okay… one more ❤️</button>
+  </div></section>
+
+  <section class="scene"><div class="card">
+    <div class="kicker">the part that made me smile</div>
+    <div class="media"><video src="assets/dance-cat.mp4" autoplay loop muted playsinline preload="auto"></video></div>
+    <p class="message">Soon you'll go home and show your family what those <b>little hands</b> worked so hard for — your first job. 🥹</p>
+    <p class="subtitle">I hope you see the happiness on their faces and keep this moment forever.</p>
+    <button class="btn" data-next>Now we celebrate! 🎀</button>
+  </div></section>
+
+  <section class="scene final-scene"><div class="orbit"></div><div class="card final-card">
+    <div class="kicker">from my heart ♡</div>
+    <div class="media"><video src="assets/dudu-hug.mp4" autoplay loop muted playsinline preload="auto"></video></div>
+    <h2 class="title" style="font-size:clamp(32px,8vw,49px)">Congratulations,<br>Harshini! 💗</h2>
+    <p class="message">I hope you smiled at least a little while going through this.<br><br><b>I'm really proud of you.</b><br>Go make this new chapter yours. ✨</p>
+    <p class="subtitle" style="font-weight:800">— Charan</p>
+    <button class="btn" id="replay">Replay ↻</button>
+  </div></section>
+</div>
+<script>
+const scenes=[...document.querySelectorAll('.scene')];
+const dots=[...document.querySelectorAll('.dot')];let current=0;
+function show(n){current=(n+scenes.length)%scenes.length;scenes.forEach((s,i)=>s.classList.toggle('active',i===current));dots.forEach((d,i)=>d.classList.toggle('on',i===current));
+  scenes[current].querySelectorAll('video').forEach(v=>{try{v.currentTime=0;v.play().catch(()=>{})}catch(e){}})
+}
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>show(current+1)));
+document.getElementById('replay').addEventListener('click',()=>show(0));
+let sx=0;document.addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX},{passive:true});document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>80)show(current+(dx<0?1:-1))},{passive:true});
+// keyboard support
+window.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(current+1);if(e.key==='ArrowLeft')show(current-1);if(e.key==='Escape')show(0)});
+</script>
+</body>
+</html>
